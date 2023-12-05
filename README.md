@@ -1,0 +1,2 @@
+# paper-template
+LaTeX template
