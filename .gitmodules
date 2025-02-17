@@ -1,0 +1,3 @@
+[submodule "templates/acmart-primary"]
+	path = templates/acmart-primary
+	url = https://github.com/andstor/acm-primary-article-template.git
