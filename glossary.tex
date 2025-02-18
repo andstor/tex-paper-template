@@ -1,0 +1,55 @@
+
+\usepackage{xparse}
+\DeclareDocumentCommand{\newdualentry}{ O{} O{} m m m m } {
+    \newglossaryentry{gls-#3}{name={#5},text={#5\glsadd{#3}},
+        description={#6},#1
+    }
+    \newacronym[see={[Glossary:]{gls-#3}},name={#4},#2]{#3}{#4\glsadd{gls-#3}}{#5}
+} % as per http://en.wikibooks.org/wiki/LaTeX/Glossary
+
+\newcommand\acrfullr[2][]{\acrshort[#1]{#2} (\acrlong[#1]{#2})}
+
+\makeglossaries % Prepare for adding glossary entries
+
+% ----------------------
+% ----- Glossaries -----
+% ----------------------
+
+\newglossaryentry{f1}
+{
+    name=F1,
+    description={Harmonic mean of precision and recall}
+}
+
+
+% --------------------
+% ----- Acronyms -----
+% --------------------
+
+\newacronym{rf}{RF}{Random Forest}
+\newacronym{dt}{DT}{Desision Tree}
+\newacronym{svm}{SVM}{Support Vewctor Machine}
+\newacronym{dnn}{DNN}{Deep Neural Network}
+\newacronym{cnn}{CNN}{Convolutional Neural Network}
+\newacronym{knn}{KNN}{K-Nearest Neighbor}
+\newacronym{sgd}{SGD}{Stochastic Gradient Descent}
+\newacronym{rnn}{RNN}{Recurrent Neural Network}
+\newacronym{gan}{GAN}{Generative Adversarial Network}
+\newacronym{gnn}{GNN}{Graph Neural Network}
+\newacronym{lstm}{LSTM}{Long Short-Term Memory}
+\newacronym{att-blstm}{Att-BLSTM}{Attention-Based Bidirectional Long Short-Term Memory}
+\newacronym{awd-lstm}{AWD-LSTM}{Average Stochastic Gradient Descent Weighted Dropped LSTM}
+\newacronym{tfidf}{TFIDF}{Term Frequency–Inverse Document Frequency}
+\newacronym{loc}{LoC}{Lines of Source Code}
+
+\newacronym{bf16}{bfloat16}{Brain Floating Point}
+\newacronym{fp16}{float16}{Half-precision Floating-Point}
+
+% -----------------------
+% ----- Dual entries -----
+% -----------------------
+
+\newdualentry{bleu} % label
+{BLEU}            % abbreviation
+{BiLingual Evaluation Understudy}  % long form
+{Metric for automatically evaluating machine-translated text} % description
