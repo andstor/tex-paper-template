@@ -16,7 +16,7 @@ jobs:
       with:
         personal_token: ${{ secrets.PERSONAL_TOKEN }}
         src_path: /.
-        filter: '**/{bibliography.bib,software.bib}'
+        filter: 'bibliography.bib software.bib'
         dst_owner: andstor
         dst_repo_name: bibliography
         dst_branch: main
