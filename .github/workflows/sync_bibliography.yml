@@ -15,20 +15,9 @@ jobs:
       uses: andstor/copycat-action@v3
       with:
         personal_token: ${{ secrets.PERSONAL_TOKEN }}
-        src_path: /bibliography.bib
-        dst_path: /bibliography.bib
-        dst_owner: andstor
-        dst_repo_name: bibliography
-        dst_branch: main
-        src_branch: main
-        username: nutsbot
-        email: andr3.storhaug+bot@gmail.com
-    - name: Copy software bibliography
-      uses: andstor/copycat-action@v3
-      with:
-        personal_token: ${{ secrets.PERSONAL_TOKEN }}
-        src_path: /software.bib
-        dst_path: /software.bib
+        src_path: /.
+        dst_path: /.
+        file_filter: '{bibliography.bib,software.bib}'
         dst_owner: andstor
         dst_repo_name: bibliography
         dst_branch: main
