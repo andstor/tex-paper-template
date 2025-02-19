@@ -4,9 +4,3 @@
 [submodule "templates/ieee-conference"]
 	path = templates/ieee-conference
 	url = https://github.com/andstor/ieee-conference-template.git
-[submodule "bibliography"]
-	path = bibliography
-	url = https://github.com/andstor/bibliography.git
-[submodule "glossary"]
-	path = glossary
-	url = https://github.com/andstor/glossary.git
