@@ -14,8 +14,8 @@ jobs:
       uses: andstor/copycat-action@v3
       with:
         personal_token: ${{ secrets.PERSONAL_TOKEN }}
-        src_path: glossary.tex
-        dst_path: glossary.tex
+        src_path: /glossary.tex
+        dst_path: /glossary.tex
         dst_owner: andstor
         dst_repo_name: glossary
         dst_branch: main
