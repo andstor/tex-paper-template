@@ -1,0 +1,24 @@
+name: Sync glossary
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'glossary.bib'
+  workflow_dispatch:
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Copy
+      uses: andstor/copycat-action@v3
+      with:
+        personal_token: ${{ secrets.PERSONAL_TOKEN }}
+        src_path: glossary.bib
+        dst_path: glossary.bib
+        dst_owner: andstor
+        dst_repo_name: glossary
+        dst_branch: main
+        src_branch: main
+        username: nutsbot
+        email: andr3.storhaug+bot@gmail.com
