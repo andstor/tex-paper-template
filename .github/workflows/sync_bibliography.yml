@@ -5,16 +5,31 @@ on:
       - main
     paths:
       - 'bibliography.bib'
+      - 'software.bib'
   workflow_dispatch:
 jobs:
-  sync:
+  sync-bibliography:
     runs-on: ubuntu-latest
     steps:
-    - name: Copy bibliography
+    - name: Copy
       uses: andstor/copycat-action@v3
       with:
         personal_token: ${{ secrets.PERSONAL_TOKEN }}
         src_path: /bibliography.bib
+        dst_owner: andstor
+        dst_repo_name: bibliography
+        dst_branch: main
+        src_branch: main
+        username: nutsbot
+        email: andr3.storhaug+bot@gmail.com
+  sync-software:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Copy
+      uses: andstor/copycat-action@v3
+      with:
+        personal_token: ${{ secrets.PERSONAL_TOKEN }}
+        src_path: /software.bib
         dst_owner: andstor
         dst_repo_name: bibliography
         dst_branch: main
