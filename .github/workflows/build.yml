@@ -23,7 +23,7 @@ jobs:
         run: |
           git config --global user.name "nutsbot"
           git config --global user.email "nutsbot@users.noreply.github.com"
-          git add manuscript.pdf
+          git add main.pdf
           if output=$(git status --porcelain) && [ ! -z "$output" ]; then
             git commit -m 'Update manuscript.pdf'
             git push
