@@ -1,0 +1,3 @@
+bibliography.bib merge=union
+software.bib merge=union
+glossary.tex merge=union
