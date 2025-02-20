@@ -11,20 +11,14 @@ jobs:
     steps:
       - name: Set up Git repository
         uses: actions/checkout@v4
-
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v3
         with:
           root_file: main.tex
           extra_system_packages: "perl-file-which"
           latexmk_shell_escape: true
-
-      - name: Commit pdf
-        run: |
-          git config --global user.name "nutsbot"
-          git config --global user.email "nutsbot@users.noreply.github.com"
-          git add main.pdf
-          if output=$(git status --porcelain) && [ ! -z "$output" ]; then
-            git commit -m 'Update main.pdf'
-            git push
-          fi
+      - name: Archive compiled pdf
+        uses: actions/upload-artifact@v4
+        with:
+          name: main.pdf
+          path: main.pdf
