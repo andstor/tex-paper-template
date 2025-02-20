@@ -17,8 +17,23 @@ jobs:
           root_file: main.tex
           extra_system_packages: "perl-file-which"
           latexmk_shell_escape: true
-      - name: Archive compiled pdf
-        uses: actions/upload-artifact@v4
+      - name: Checkout private tools
+        uses: actions/checkout@v4
         with:
-          name: main.pdf
-          path: main.pdf
+          repository: andstor/archive
+          token: ${{ secrets.PERSONAL_TOKEN }} # `GH_PAT` is a secret that contains your PAT
+          path: archive
+      - name: Commit pdf
+        working-directory: ./archive
+        run: |
+          git config --global user.name "nutsbot"
+          git config --global user.email "nutsbot@users.noreply.github.com"
+          repo_name=$(basename "${{ github.repository }}")
+          mkdir -p "$repo_name"
+          cp ../main.pdf "$repo_name/main.pdf"
+          git add tex.pdf
+          if output=$(git status --porcelain) && [ ! -z "$output" ]; then
+            git commit -m 'Update main.pdf'
+            git push
+          fi
+
