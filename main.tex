@@ -1,9 +1,5 @@
 \documentclass[a4paper,12pt]{article}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{geometry}
-\geometry{margin=1in}
-\usepackage{amsmath, amssymb}
+\usepackage{cite}
 
 \begin{document}
 
@@ -16,9 +12,15 @@
 Simple LaTeX example.
 
 \section{Content}
-Include your main content here. Example equation:
+Include your main content here \cite{cgal,delebecque:hal-02090402}. \cite{simplemapper-condensed,ad-wood-2003}
+Example equation:
 \begin{equation}
     E = mc^2
 \end{equation}
+
+
+\bibliographystyle{plain}
+\bibliography{software}
+
 
 \end{document}
