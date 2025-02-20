@@ -31,7 +31,7 @@ jobs:
           repo_name=$(basename "${{ github.repository }}")
           mkdir -p "$repo_name"
           cp ../main.pdf "$repo_name/main.pdf"
-          git add main.pdf
+          git add "$repo_name/main.pdf"
           if output=$(git status --porcelain) && [ ! -z "$output" ]; then
             git commit -m 'Update main.pdf'
             git push
