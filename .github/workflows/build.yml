@@ -17,13 +17,13 @@ jobs:
           root_file: main.tex
           extra_system_packages: "perl-file-which"
           latexmk_shell_escape: true
-      - name: Checkout private tools
+      - name: Checkout archive
         uses: actions/checkout@v4
         with:
           repository: andstor/archive
           token: ${{ secrets.PERSONAL_TOKEN }} # `GH_PAT` is a secret that contains your PAT
           path: archive
-      - name: Commit pdf
+      - name: Archive pdf
         working-directory: ./archive
         run: |
           git config --global user.name "nutsbot"
@@ -31,7 +31,7 @@ jobs:
           repo_name=$(basename "${{ github.repository }}")
           mkdir -p "$repo_name"
           cp ../main.pdf "$repo_name/main.pdf"
-          git add tex.pdf
+          git add main.pdf
           if output=$(git status --porcelain) && [ ! -z "$output" ]; then
             git commit -m 'Update main.pdf'
             git push
