@@ -47,14 +47,3 @@ jobs:
           git add .github/workflows/sync.yml
           git commit -m "Add $REPO_NAME to glossary sync matrix"
           git push
-
-      - name: Checkout this repo
-        uses: actions/checkout@v4
-
-      - name: Delete this workflow
-        run: |
-          git rm "$WORKFLOW_FILE"
-          git config user.name "nutsbot"
-          git config user.email "andr3.storhaug+bot@gmail.com"
-          git commit -m "Remove $WORKFLOW_FILE after successful registration"
-          git push
