@@ -1,4 +1,4 @@
-# paper-template
+# tex-paper-template
 > LaTeX paper template
 
 
