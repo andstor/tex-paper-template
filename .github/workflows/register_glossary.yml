@@ -1,8 +1,6 @@
 name: Register repo with glossary sync
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -10,8 +8,6 @@ permissions:
 
 jobs:
   update-glossary:
-    name: Add this repo to glossary sync
-    if: ${{ !github.event.repository.is_template }}
     runs-on: ubuntu-latest
 
     env:
