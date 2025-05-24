@@ -12,7 +12,7 @@ This template supports automatic syncing of bibliographies and glossaries. The b
 
 ## Manuscript templates
 
-Several common academic manuscript templates are available as submodules under `./templates`. Copy contents into root directory.
+To use common academic manuscript templates, simply copy the contents into root directory.
 
-> [!NOTE]  
-> Overleaf does not support submodules.
+- [ACM Primary Article Template](https://github.com/andstor/acm-primary-article-template)
+- [IEEE Conference Template](https://github.com/andstor/ieee-conference-template)
