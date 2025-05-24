@@ -1,8 +1,6 @@
 name: Register repo with bibliography sync
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -10,8 +8,6 @@ permissions:
 
 jobs:
   update-bibliography:
-    name: Add this repo to bibliography sync
-    if: ${{ !github.event.repository.is_template }}
     runs-on: ubuntu-latest
 
     env:
