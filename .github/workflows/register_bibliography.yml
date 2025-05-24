@@ -1,0 +1,64 @@
+name: Register repo with bibliography sync
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-bibliography:
+    name: Add this repo to bibliography sync
+    if: ${{ !github.event.repository.is_template }}
+    runs-on: ubuntu-latest
+
+    env:
+      REPO_OWNER: ${{ github.repository_owner }}
+      REPO_NAME: ${{ github.event.repository.name }}
+      WORKFLOW_FILE: .github/workflows/register-bibliography.yml
+
+    steps:
+      - name: Checkout bibliography repo
+        uses: actions/checkout@v4
+        with:
+          repository: andstor/bibliography
+          token: ${{ secrets.PERSONAL_TOKEN }}
+          path: bibliography
+
+      - name: Check if repository is already in matrix
+        id: check_matrix
+        uses: mikefarah/yq@master
+        with:
+          cmd: >
+            yq '.jobs.sync.strategy.matrix.include[] |
+              select(.repo_owner == strenv(REPO_OWNER) and .repo_name == strenv(REPO_NAME))' bibliography/.github/workflows/sync.yml
+
+      - name: Add repository to matrix if missing
+        if: steps.check_matrix.outputs.result == ''
+        uses: mikefarah/yq@master
+        with:
+          cmd: >
+            yq -i '.jobs.sync.strategy.matrix.include += [{"repo_owner": strenv(REPO_OWNER), "repo_name": strenv(REPO_NAME)}]' bibliography/.github/workflows/sync.yml
+
+      - name: Commit and push changes to bibliography repo
+        if: steps.check_matrix.outputs.result == ''
+        run: |
+          cd bibliography
+          git config user.name "nutsbot"
+          git config user.email "andr3.storhaug+bot@gmail.com"
+          git add .github/workflows/sync.yml
+          git commit -m "Add $REPO_NAME to bibliography sync matrix"
+          git push
+
+      - name: Checkout this repo
+        uses: actions/checkout@v4
+
+      - name: Delete this workflow
+        run: |
+          git rm "$WORKFLOW_FILE"
+          git config user.name "nutsbot"
+          git config user.email "andr3.storhaug+bot@gmail.com"
+          git commit -m "Remove $WORKFLOW_FILE after successful registration"
+          git push
